@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Core Background Colors */
+    --color-background: #0A0A0F; /* near-black with blue undertones */
+    --color-foreground: #FFFFFF; /* pure white */
+    --color-surface: #1A1B2E; /* dark navy */
+    --color-surface-foreground: #FFFFFF; /* white */
+    
+    /* Border and Input Colors */
+    --color-border: rgba(255, 255, 255, 0.1); /* subtle white border */
+    --color-input: #1A1B2E; /* dark navy */
+    --color-ring: #00D4FF; /* electric cyan */
+    
+    /* Card and Popover Colors */
+    --color-card: #1A1B2E; /* dark navy */
+    --color-card-foreground: #FFFFFF; /* white */
+    --color-popover: #1A1B2E; /* dark navy */
+    --color-popover-foreground: #FFFFFF; /* white */
+    
+    /* Muted Colors */
+    --color-muted: #2A2B3E; /* slightly lighter navy */
+    --color-muted-foreground: #A0A9C0; /* muted blue-gray */
+    
+    /* Primary Brand Colors */
+    --color-primary: #00D4FF; /* electric cyan */
+    --color-primary-foreground: #0A0A0F; /* near-black */
+    
+    /* Secondary Colors */
+    --color-secondary: #8B5CF6; /* deep violet */
+    --color-secondary-foreground: #FFFFFF; /* white */
+    
+    /* Accent Colors */
+    --color-accent: #FF6B6B; /* coral red */
+    --color-accent-foreground: #FFFFFF; /* white */
+    
+    /* State Colors */
+    --color-success: #00FF88; /* bright green */
+    --color-success-foreground: #0A0A0F; /* near-black */
+    
+    --color-warning: #FFB800; /* amber */
+    --color-warning-foreground: #0A0A0F; /* near-black */
+    
+    --color-error: #FF4757; /* vibrant red */
+    --color-error-foreground: #FFFFFF; /* white */
+    
+    --color-destructive: #FF4757; /* vibrant red */
+    --color-destructive-foreground: #FFFFFF; /* white */
+    
+    /* Cosmic Animation Variables */
+    --cosmic-glow: 0 4px 20px rgba(0, 212, 255, 0.15);
+    --cosmic-glow-intense: 0 8px 32px rgba(0, 212, 255, 0.25);
+    --cosmic-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  /* Cosmic Background Animations */
+  @keyframes shooting-star {
+    0% {
+      transform: translateX(-100px) translateY(-100px);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(100vw) translateY(100vh);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes planet-rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes cosmic-pulse {
+    0%, 100% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.6;
+      transform: scale(1.05);
+    }
+  }
+  
+  /* Reduced Motion Support */
+  @media (prefers-reduced-motion: reduce) {
+    @keyframes shooting-star {
+      0%, 100% {
+        opacity: 0.3;
+      }
+      50% {
+        opacity: 0.6;
+      }
+    }
+    
+    @keyframes planet-rotation {
+      0%, 100% {
+        transform: rotate(0deg);
+      }
+    }
+    
+    @keyframes cosmic-pulse {
+      0%, 100% {
+        opacity: 0.3;
+      }
+    }
+  }
+}
+
+@layer components {
+  /* Cosmic Navigation Styles */
+  .cosmic-nav-item {
+    @apply relative overflow-hidden transition-all duration-300 ease-out;
+  }
+.cosmic-nav-item::before  {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r opacity-0 transition-opacity duration-300;
+  }
+  
+  .cosmic-nav-item:hover::before {
+    @apply opacity-100;
+  }
+.cosmic-nav-item.active  {
+    @apply bg-gradient-to-r;
+    box-shadow: var(--cosmic-glow);
+  }
+  
+  /* Cosmic Glow Effects */
+  .cosmic-glow {
+    box-shadow: var(--cosmic-glow);
+  }
+  
+  .cosmic-glow-intense {
+    box-shadow: var(--cosmic-glow-intense);
+  }
+  
+  /* Typography Classes */
+  .font-heading {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+  }
+  
+  .font-body {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+  }
+  
+  .font-data {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 400;
+  }
+}
+
+@layer utilities {
+  /* Animation Utilities */
+  .animate-shooting-star {
+    animation: shooting-star 3s linear infinite;
+  }
+  
+  .animate-planet-rotation {
+    animation: planet-rotation 60s linear infinite;
+  }
+  
+  .animate-cosmic-pulse {
+    animation: cosmic-pulse 4s ease-in-out infinite;
+  }
+  
+  /* Cosmic Spacing */
+  .space-cosmic {
+    @apply space-y-2;
+  }
+  
+  /* Safe Area Support */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .pt-safe {
+    padding-top: env(safe-area-inset-top);
+  }
+}
